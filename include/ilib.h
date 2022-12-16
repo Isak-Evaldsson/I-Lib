@@ -5,6 +5,7 @@
 #define ILIB_H
 
 #include "ilib/list.h"
+#include "ilib/set.h"
 #include "ilib/vector.h"
 
 #endif /* ILIB_H */

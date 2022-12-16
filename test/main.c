@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "ilib.h"
 
@@ -73,6 +74,70 @@ void list_test_free()
     printf("Success\n");
 }
 
+void set_test_add_values()
+{
+    printf("Add values to set...");
+    size_t n = 100;
+    void  *values[n];
+    set_t *set = set_new();
+
+    // Add random pointer values to set
+    for (size_t i = 0; i < n; i++) {
+        values[i] = (void *)(n + rand());
+        assert(set_add(set, values[i]));
+    }
+
+    // Check if all values are within the set
+    for (size_t i = 0; i < n; i++) {
+        assert(set_contains(set, values[i]));
+    }
+
+    // Check values that dosen't exits
+    for (size_t i = 0; i < n; i++) {
+        assert(set_contains(set, (void *)i) == false);
+    }
+
+    set_free(set);
+    printf("Success\n");
+}
+
+bool in_array(void **ptr, void *data, size_t n)
+{
+    for (size_t i = 0; i < n; i++) {
+        if (ptr[i] == data) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void set_test_to_vector()
+{
+    printf("To vector...");
+    size_t n = 100;
+    void  *values[n];
+    set_t *set = set_new();
+
+    // Add random pointer values to set
+    for (size_t i = 0; i < n; i++) {
+        values[i] = (void *)(n + rand());
+        assert(set_add(set, values[i]));
+    }
+
+    vector_t *vec = set_to_vector(set);
+    assert(vector_size(vec) == set_size(set));
+
+    size_t vec_size;
+    void **ptr = vector_array_ptr(vec, &vec_size);
+    for (size_t i = 0; i < vec_size; i++) {
+        assert(in_array(values, ptr[i], n));
+    }
+
+    vector_free(vec);
+    set_free(set);
+    printf("Success\n");
+}
+
 int main()
 {
     printf("Vector tests:\n");
@@ -81,4 +146,8 @@ int main()
     printf("\nList tests:\n");
     list_test_push_pop();
     list_test_free();
+
+    printf("\nSet tests:\n");
+    set_test_add_values();
+    set_test_to_vector();
 }

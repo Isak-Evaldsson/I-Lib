@@ -26,6 +26,6 @@ test: test/main.c $(BUILD_DIR)/$(LIB_NAME).a
 	valgrind ./$(BUILD_DIR)/test
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR) vgcore.*
 
 .PHONY: clean test rule
