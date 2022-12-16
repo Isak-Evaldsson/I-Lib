@@ -6,7 +6,7 @@ The library contains the following, for more details/documentation see the code/
 
 ### Data structures
 * **vector_t** - resizable array, allowing you to push to it, index it and iterate over it
-* **list_t** - general purpose list, with fast push/pop allowing it work like a queue, it also implements plenty of iteration functions allowing you to manipulate the list while iterating
+* **list_t** - general purpose list, with fast push/pop allowing it work like a queue, exposes interal structure to the user, allowing fast iteration using do while
 
 ## Usage
 The makefile currently builds a static library that can be compiled into your code projects, since this library won't be widely distributed this simples the usage compared to dynamic linking
