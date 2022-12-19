@@ -6,7 +6,7 @@ BUILD_DIR = build
 # Compiler flags
 CC=gcc
 CFLAGS= -g -I$(INCLUDE_DIR)
-LIB_NAME = ilib
+LIB_NAME = libi
 
 # Compile object files
 FILES = $(wildcard $(SRC_DIR)/*.c)
